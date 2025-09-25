@@ -1,0 +1,126 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/># mynorgaming
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        #calculadora {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 23%;
+            padding: 10px;
+            margin: 1%;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="calculadora">
+        <input type="text" id="resultado" disabled>
+        <div>
+            <button onclick="agregarNumero('1')">1</button>
+            <button onclick="agregarNumero('2')">2</button>
+            <button onclick="agregarNumero('3')">3</button>
+            <button onclick="operar('+')">+</button>
+        </div>
+        <div>
+            <button onclick="agregarNumero('4')">4</button>
+            <button onclick="agregarNumero('5')">5</button>
+            <button onclick="agregarNumero('6')">6</button>
+            <button onclick="operar('-')">-</button>
+        </div>
+        <div>
+            <button onclick="agregarNumero('7')">7</button>
+            <button onclick="agregarNumero('8')">8</button>
+            <button onclick="agregarNumero('9')">9</button>
+            <button onclick="operar('*')">*</button>
+        </div>
+        <div>
+            <button onclick="limpiar()">C</button>
+            <button onclick="agregarNumero('0')">0</button>
+            <button onclick="calcular()">=</button>
+            <button onclick="operar('/')">/</button>
+        </div>
+    </div>
+
+    <script>
+        let resultado = document.getElementById('resultado');
+        let operacion = '';
+        let numero1 = '';
+        let numero2 = '';
+
+        function agregarNumero(num) {
+            resultado.value += num;
+        }
+
+        function operar(op) {
+            if (resultado.value !== '') {
+                numero1 = resultado.value;
+                operacion = op;
+                resultado.value = '';
+            }
+        }
+
+        function calcular() {
+            if (numero1 !== '' && resultado.value !== '') {
+                numero2 = resultado.value;
+                let res;
+                switch (operacion) {
+                    case '+':
+                        res = parseFloat(numero1) + parseFloat(numero2);
+                        break;
+                    case '-':
+                        res = parseFloat(numero1) - parseFloat(numero2);
+                        break;
+                    case '*':
+                        res = parseFloat(numero1) * parseFloat(numero2);
+                        break;
+                    case '/':
+                        res = parseFloat(numero1) / parseFloat(numero2);
+                        break;
+                }
+                resultado.value = res;
+                numero1 = '';
+                numero2 = '';
+                operacion = '';
+            }
+        }
+
+        function limpiar() {
+            resultado.value = '';
+            numero1 = '';
+            numero2 = '';
+            operacion = '';
+        }
+    </script>
+</body>
+</html>
