@@ -1,60 +1,67 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/># MynorMods
-
-<!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de Contraseñas</title>
+    <title>Calculadora de Física MynorMods</title>
     <style>
         body {
             background-color: black;
-            color: #00ff00;
-            font-family: 'Courier New', Courier, monospace;
+            color: green;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
             text-align: center;
-            padding: 50px;
         }
-        #password {
-            font-size: 24px;
-            margin: 20px 0;
+        .calculator {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 2px solid green;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
         }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #00ff00;
-            border: none;
-            color: black;
+        input[type="number"], input[type="button"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid green;
+            border-radius: 5px;
+            background-color: black;
+            color: green;
         }
     </style>
 </head>
 <body>
-    <h1>Generador de Contraseñas</h1>
-    <div id="password">Tu contraseña aparecerá aquí</div>
-    <button onclick="generarContrasena()">Generar Contraseña</button>
-    <button onclick="guardarContrasena()">Guardar Contraseña</button>
+    <h1>Calculadora de Física MynorMods</h1>
+    <div class="calculator">
+        <h2>Calcular Gravedad</h2>
+        <input type="number" id="masa" placeholder="Masa (kg)">
+        <input type="number" id="altura" placeholder="Altura (m)">
+        <input type="button" value="Calcular Gravedad" onclick="calcularGravedad()">
+        <p id="resultadoGravedad"></p>
+
+        <h2>Calcular Velocidad</h2>
+        <input type="number" id="distancia" placeholder="Distancia (m)">
+        <input type="number" id="tiempo" placeholder="Tiempo (s)">
+        <input type="button" value="Calcular Velocidad" onclick="calcularVelocidad()">
+        <p id="resultadoVelocidad"></p>
+    </div>
 
     <script>
-        function generarContrasena() {
-            const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
-            let contrasena = '';
-            for (let i = 0; i < 12; i++) {
-                contrasena += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
-            }
-            document.getElementById('password').innerText = contrasena;
+        function calcularGravedad() {
+            const masa = document.getElementById('masa').value;
+            const altura = document.getElementById('altura').value;
+            const gravedad = 9.81; // m/s²
+            const energiaPotencial = masa * gravedad * altura;
+            document.getElementById('resultadoGravedad').innerText = `Energía Potencial: ${energiaPotencial} J`;
         }
 
-        function guardarContrasena() {
-            const contrasena = document.getElementById('password').innerText;
-            if (contrasena === 'Tu contraseña aparecerá aquí') {
-                alert('Por favor, genera una contraseña primero.');
-            } else {
-                const blob = new Blob([contrasena], { type: 'text/plain' });
-                const link = document.createElement('a');
-                link.href = window.URL.createObjectURL(blob);
-                link.download = 'contrasena.txt';
-                link.click();
-            }
+        function calcularVelocidad() {
+            const distancia = document.getElementById('distancia').value;
+            const tiempo = document.getElementById('tiempo').value;
+            const velocidad = distancia / tiempo;
+            document.getElementById('resultadoVelocidad').innerText = `Velocidad: ${velocidad} m/s`;
         }
     </script>
 </body>
